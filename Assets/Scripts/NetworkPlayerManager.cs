@@ -6,7 +6,7 @@ using UnityEngine;
 public class NetworkPlayerManager : MonoBehaviour
 {
         [SerializeField] private UnityClient client;
-        private Dictionary<ushort, AgarObject> _networkPlayers = new Dictionary<ushort, AgarObject>();
+        private readonly Dictionary<ushort, AgarObject> _networkPlayers = new Dictionary<ushort, AgarObject>();
 
         private void Awake()
         {
