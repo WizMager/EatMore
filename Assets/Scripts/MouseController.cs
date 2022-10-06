@@ -1,23 +1,19 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+[RequireComponent(typeof(AgarObject))]
+public class MouseController : MonoBehaviour
 {
-    [RequireComponent(typeof(AgarObject))]
-    public class MouseController : MonoBehaviour
+    private AgarObject _agarObject;
+
+    private void Awake()
     {
-        private AgarObject _agarObject;
+        _agarObject = GetComponent<AgarObject>();
+    }
 
-        private void Awake()
-        {
-            _agarObject = GetComponent<AgarObject>();
-        }
-
-        private void Update()
-        {
-            var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0;
-            _agarObject.SetMovePosition(mousePosition);
-        }
+    private void Update()
+    {
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+        _agarObject.SetMovePosition(mousePosition);
     }
 }

@@ -1,42 +1,38 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+public class AgarObject : MonoBehaviour
 {
-    public class AgarObject : MonoBehaviour
+    [SerializeField] private float speed;
+    [SerializeField] private float scale;
+
+    private Vector3 _movePosition;
+
+    private void Awake()
     {
-        [SerializeField] private float speed;
-        [SerializeField] private float scale;
+        _movePosition = transform.position;
+    }
 
-        private Vector3 _movePosition;
-
-        private void Awake()
+    private void Update()
+    {
+        if (speed != 0)
         {
-            _movePosition = transform.position;
+            transform.position = Vector3.MoveTowards(transform.position, _movePosition, speed * Time.deltaTime);
         }
+    }
 
-        private void Update()
-        {
-            if (speed != 0)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, _movePosition, speed * Time.deltaTime);
-            }
-        }
+    public void SetColor(Color32 color)
+    {
+        var renderer = GetComponent<Renderer>();
+        renderer.material.color = color;
+    }
 
-        public void SetColor(Color32 color)
-        {
-            var renderer = GetComponent<Renderer>();
-            renderer.material.color = color;
-        }
+    public void SetRadius(float radius)
+    {
+        transform.localScale = new Vector3(radius * scale, radius * scale, 1);
+    }
 
-        public void SetRadius(float radius)
-        {
-            transform.localScale = new Vector3(radius * scale, radius * scale, 1);
-        }
-
-        public void SetMovePosition(Vector3 newPosition)
-        {
-            _movePosition = newPosition;
-        }
+    public void SetMovePosition(Vector3 newPosition)
+    {
+        _movePosition = newPosition;
     }
 }
