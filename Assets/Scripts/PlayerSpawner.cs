@@ -7,6 +7,7 @@ public class PlayerSpawner : MonoBehaviour
       [SerializeField] private UnityClient client;
       [SerializeField] private GameObject controllablePrefab;
       [SerializeField] private GameObject networkPrefab;
+      [SerializeField] private NetworkPlayerManager networkPlayerManager;
 
       private void Awake()
       {
@@ -55,11 +56,22 @@ public class PlayerSpawner : MonoBehaviour
                                     reader.ReadByte(),
                                     255);
                               
-                              var playerGameObject = Instantiate(id == client.ID ? controllablePrefab : networkPrefab, position, Quaternion.identity);
+                              GameObject playerGameObject;
+                              if (id == client.ID)
+                              {
+                                    playerGameObject = Instantiate(controllablePrefab, position, Quaternion.identity);
+                                    var player = playerGameObject.GetComponent<Player>();
+                                    player.Client = client;
+                              }
+                              else
+                              {
+                                    playerGameObject = Instantiate(networkPrefab, position, Quaternion.identity);
+                              }
                               
                               var agarObject = playerGameObject.GetComponent<AgarObject>();
                               agarObject.SetRadius(radius);
                               agarObject.SetColor(color);
+                              networkPlayerManager.Add(id, agarObject);
                         }
                   } 
             }
