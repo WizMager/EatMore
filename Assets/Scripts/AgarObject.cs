@@ -4,7 +4,6 @@ public class AgarObject : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float scale;
-
     private Vector3 _movePosition;
 
     private void Awake()
@@ -22,8 +21,8 @@ public class AgarObject : MonoBehaviour
 
     public void SetColor(Color32 color)
     {
-        var renderer = GetComponent<Renderer>();
-        renderer.material.color = color;
+        var playerRenderer = GetComponent<Renderer>();
+        playerRenderer.material.color = color;
     }
 
     public void SetRadius(float radius)

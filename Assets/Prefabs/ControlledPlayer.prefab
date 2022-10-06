@@ -12,6 +12,10 @@ PrefabInstance:
       value: ControlledPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 3677962006932298507, guid: 0d74acc8e910de148886f52a32463fc2, type: 3}
+      propertyPath: scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3677962006932298507, guid: 0d74acc8e910de148886f52a32463fc2, type: 3}
       propertyPath: speed
       value: 2
       objectReference: {fileID: 0}

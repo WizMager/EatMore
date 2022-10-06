@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  scale: 0
+  scale: 1
 --- !u!212 &9139245744242732748
 SpriteRenderer:
   m_ObjectHideFlags: 0
