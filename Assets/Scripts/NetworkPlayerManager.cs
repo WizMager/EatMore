@@ -15,21 +15,27 @@ public class NetworkPlayerManager : MonoBehaviour
 
         private void MessageReceiveHandler(object sender, MessageReceivedEventArgs e)
         {
-                using (var message = e.GetMessage())
+                using var message = e.GetMessage();
+                
+                if (message.Tag == Tags.PlayerMoveTag)
                 {
-                        if (message.Tag == Tags.PlayerMoveTag)
-                        {
-                                using (var reader = message.GetReader())
-                                {
-                                        var id = reader.ReadUInt16();
-                                        var newPosition = new Vector3(reader.ReadSingle(), reader.ReadSingle(), 0);
+                        using var reader = message.GetReader();
+                        var id = reader.ReadUInt16();
+                        var newPosition = new Vector3(reader.ReadSingle(), reader.ReadSingle(), 0);
 
-                                        if (_networkPlayers.ContainsKey(id))
-                                        {
-                                                _networkPlayers[id].SetMovePosition(newPosition);
-                                        }
-                                }
+                        if (_networkPlayers.ContainsKey(id))
+                        {
+                                _networkPlayers[id].SetMovePosition(newPosition);
                         }
+                }
+
+                if (message.Tag == Tags.RadiusUpdateTag)
+                {
+                        using var reader = message.GetReader();
+                        var id = reader.ReadUInt16();
+                        float radius = reader.ReadSingle();
+                                        
+                        _networkPlayers[id].SetRadius(radius);
                 }
         }
 

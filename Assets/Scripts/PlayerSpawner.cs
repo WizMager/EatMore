@@ -8,6 +8,7 @@ public class PlayerSpawner : MonoBehaviour
       [SerializeField] private GameObject controllablePrefab;
       [SerializeField] private GameObject networkPrefab;
       [SerializeField] private NetworkPlayerManager networkPlayerManager;
+      [SerializeField] private CameraFollow cameraFollow;
 
       private void Awake()
       {
@@ -81,6 +82,7 @@ public class PlayerSpawner : MonoBehaviour
                         playerGameObject = Instantiate(controllablePrefab, position, Quaternion.identity);
                         var player = playerGameObject.GetComponent<Player>();
                         player.Client = client;
+                        cameraFollow.Target = player.transform;
                   }
                   else
                   {
