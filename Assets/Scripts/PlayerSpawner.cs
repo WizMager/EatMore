@@ -29,51 +29,68 @@ public class PlayerSpawner : MonoBehaviour
                   Application.Quit();
             }
 
-            client.MessageReceived += SpawnPlayer;
+            client.MessageReceived += MessageReceiveHandler;
+      }
+
+      private void MessageReceiveHandler(object sender, MessageReceivedEventArgs e)
+      {
+            using var message = e.GetMessage();
+            
+            if (message.Tag == Tags.SpawnPlayerTag)
+            {
+                  SpawnPlayer(sender, e);
+            }
+
+            if (message.Tag == Tags.DespawnPlayerTag)
+            {
+                  DespawnPlayer(sender, e);
+            }
+      }
+
+      private void DespawnPlayer(object sender, MessageReceivedEventArgs e)
+      {
+            using var message = e.GetMessage();
+            using var reader = message.GetReader();
+            networkPlayerManager.DestroyPlayer(reader.ReadUInt16());
       }
 
       private void SpawnPlayer(object sender, MessageReceivedEventArgs e)
       {
             using var message = e.GetMessage();
-            using (var reader = message.GetReader())
+            using var reader = message.GetReader();
+            if (reader.Length % 17 != 0)
             {
-                  if (message.Tag == Tags.PlayerSpawnTag)
-                  {
-                        if (reader.Length % 17 != 0)
-                        {
-                              Debug.LogWarning("Received malformed spawn packet.");
-                              return;
-                        }
+                  Debug.LogWarning("Received malformed spawn packet.");
+                  return;
+            }
 
-                        while (reader.Position < reader.Length)
-                        {
-                              var id = reader.ReadUInt16();
-                              var position = new Vector3(reader.ReadSingle(), reader.ReadSingle());
-                              var radius = reader.ReadSingle();
-                              var color = new Color32(
-                                    reader.ReadByte(), 
-                                    reader.ReadByte(), 
-                                    reader.ReadByte(),
-                                    255);
-                              
-                              GameObject playerGameObject;
-                              if (id == client.ID)
-                              {
-                                    playerGameObject = Instantiate(controllablePrefab, position, Quaternion.identity);
-                                    var player = playerGameObject.GetComponent<Player>();
-                                    player.Client = client;
-                              }
-                              else
-                              {
-                                    playerGameObject = Instantiate(networkPrefab, position, Quaternion.identity);
-                              }
-                              
-                              var agarObject = playerGameObject.GetComponent<AgarObject>();
-                              agarObject.SetRadius(radius);
-                              agarObject.SetColor(color);
-                              networkPlayerManager.Add(id, agarObject);
-                        }
-                  } 
+            while (reader.Position < reader.Length)
+            {
+                  var id = reader.ReadUInt16();
+                  var position = new Vector3(reader.ReadSingle(), reader.ReadSingle());
+                  var radius = reader.ReadSingle();
+                  var color = new Color32(
+                        reader.ReadByte(),
+                        reader.ReadByte(),
+                        reader.ReadByte(),
+                        255);
+
+                  GameObject playerGameObject;
+                  if (id == client.ID)
+                  {
+                        playerGameObject = Instantiate(controllablePrefab, position, Quaternion.identity);
+                        var player = playerGameObject.GetComponent<Player>();
+                        player.Client = client;
+                  }
+                  else
+                  {
+                        playerGameObject = Instantiate(networkPrefab, position, Quaternion.identity);
+                  }
+
+                  var agarObject = playerGameObject.GetComponent<AgarObject>();
+                  agarObject.SetRadius(radius);
+                  agarObject.SetColor(color);
+                  networkPlayerManager.Add(id, agarObject);
             }
       }
 }

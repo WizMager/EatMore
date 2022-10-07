@@ -37,4 +37,11 @@ public class NetworkPlayerManager : MonoBehaviour
         {
                 _networkPlayers.Add(id, player);
         }
+
+        public void DestroyPlayer(ushort id)
+        {
+                var agarObject = _networkPlayers[id];
+                Destroy(agarObject.gameObject);
+                _networkPlayers.Remove(id);
+        }
 }
