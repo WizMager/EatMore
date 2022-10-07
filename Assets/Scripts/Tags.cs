@@ -6,4 +6,5 @@
      public const ushort FoodItemSendTag = 3;
      public const ushort RadiusUpdateTag = 4;
      public const ushort FoodEatTag = 5;
+     public const ushort KillPlayerTag = 6;
 }

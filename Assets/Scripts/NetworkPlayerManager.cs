@@ -2,6 +2,7 @@
 using DarkRift.Client;
 using DarkRift.Client.Unity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NetworkPlayerManager : MonoBehaviour
 {
@@ -36,6 +37,17 @@ public class NetworkPlayerManager : MonoBehaviour
                         float radius = reader.ReadSingle();
                                         
                         _networkPlayers[id].SetRadius(radius);
+                }
+
+                if (message.Tag == Tags.KillPlayerTag)
+                {
+                        using var reader = message.GetReader();  
+                        var id = reader.ReadUInt16();
+                        if (client.ID == id)
+                        {
+                                client.Disconnect();
+                                SceneManager.LoadScene(1);
+                        }
                 }
         }
 
