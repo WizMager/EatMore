@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 939828423}
   - component: {fileID: 939828425}
   - component: {fileID: 939828426}
+  - component: {fileID: 939828427}
   m_Layer: 0
   m_Name: Network
   m_TagString: Untagged
@@ -319,3 +320,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   client: {fileID: 939828423}
+--- !u!114 &939828427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939828422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f570f950b904d2a95c0d22a7d06a946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  client: {fileID: 939828423}
+  foodPrefab: {fileID: 7421307130054097296, guid: 2e440afcc4dfcda45a721d343cf49fd7, type: 3}

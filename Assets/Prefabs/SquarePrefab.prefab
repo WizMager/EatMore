@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7978449014108612847}
   - component: {fileID: 6398344737727143955}
   - component: {fileID: 4431858295363849708}
+  - component: {fileID: -2227524944521507022}
   m_Layer: 0
   m_Name: SquarePrefab
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7421307130054097296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.1626425, y: -2.6174471, z: -5.658534}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,3 +98,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2227524944521507022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7421307130054097296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1bebfd80f784060adae15616d606cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodRenderer: {fileID: 4431858295363849708}
+  foodTransform: {fileID: 7978449014108612847}
+  scale: 1
