@@ -307,6 +307,7 @@ MonoBehaviour:
   controllablePrefab: {fileID: 4968540144565032097, guid: a181969d6d1127149aba2eb56358e11d, type: 3}
   networkPrefab: {fileID: 2579953251537368936, guid: 0d74acc8e910de148886f52a32463fc2, type: 3}
   networkPlayerManager: {fileID: 939828426}
+  cameraFollow: {fileID: 519420030}
 --- !u!114 &939828426
 MonoBehaviour:
   m_ObjectHideFlags: 0
